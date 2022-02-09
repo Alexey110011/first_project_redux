@@ -23,7 +23,7 @@ export function Tablo() {
           tran[i].innerHTML=arrayVokrug[i]
         }
       
-           window.addEventListener('load', function() {
+        window.addEventListener('load', function() {
           for (let i =0;i<tran.length;i++) {
             tran[i].style.opacity = '1'
             tran[i].style.transform = 'rotateY(-360deg)'
@@ -48,9 +48,8 @@ export function Tablo() {
           let arrayVokrug1 = ['С', 'В','Е','Т','А']
           tran1[i].innerHTML=arrayVokrug1[i]
         }
-       
-                 
-              window.addEventListener('load', function() {
+                        
+        window.addEventListener('load', function() {
           for (let i =0;i<tran1.length;i++) {
             tran1[i].style.opacity = '1'
             tran1[i].style.transform = 'translateX(50px)'
@@ -58,17 +57,12 @@ export function Tablo() {
           }
       })
       
-        let calendar1;
-        for (let i = 0;i<arrayEmp.length; i++) {
-            calendar1=arrayEmp.map((i, index)=>i)
-        }
-    
     return (
       <>
       <div id='fon'>
       <nav>
-    <Link to="/map">Map</Link>
-     </nav>
+    <Link to="/map">Полет</Link>
+      </nav>
   
         <div id = "markers1"> 
             <div className ='marker_red'></div> 

@@ -1,10 +1,7 @@
 import * as React from "react"
-import './App.css';
 import Map from'./Map.js'
-import {Diary1} from'./Diary.js'
 import {Routes,
-        Route,
-        Link        
+        Route  
     } from "react-router-dom"
 import {Tablo} from './Tablo.js'
 
@@ -22,10 +19,5 @@ function App() {
 </div>
  );
 }
-<>
-<nav>
-  <Link to ="/map">Maps</Link>
-</nav>
-</>
 
 export default App;

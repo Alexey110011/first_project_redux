@@ -1,8 +1,6 @@
-import { clear } from '@testing-library/user-event/dist/clear';
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {add_point, get_wind,change_picture,show_picture, show_large_picture,show_place, show_jour, show_dist} from './actions'
+import {add_point, get_wind,show_picture,show_dist, hide_clouds, show_clouds} from './actions'
 import store from './store'
 
 let x;
@@ -12,7 +10,6 @@ let b;
 let day =0;
 let calendar=0;
 let distance;
-let place;
 let name1;
 let country1;
 export let lat = a;
@@ -32,9 +29,7 @@ inc()
     export let arrayArc=[];
     array.push(a)
     array.push(b)
-      console.log(array)
-      console.log(arrayArc)
-
+     
      function nextValue(){
      lat = Number.parseFloat(lat)+ x;
      x=0
@@ -104,28 +99,27 @@ function go(deg, speed) {
     x = -(speed*Math.cos(deg*Math.PI/180)*86.4/111).toFixed(4);
     y = -(speed*Math.sin(deg*Math.PI/180)*86.4/111).toFixed(4)
   } else
-  if(deg=0) {
+  if(deg===0) {
   x = -(speed*Math.cos(deg*Math.PI/180)*86.4/111).toFixed(4);
   y=0
   }else
-  if(deg=90) {
+  if(deg===90) {
   x=0
   y = -(speed*Math.sin(deg*Math.PI/180)*86.4/111).toFixed(4)
   } else
-  if(deg=180) {
+  if(deg===180) {
   x = -(speed*Math.cos(deg*Math.PI/180)*86.4/111).toFixed(4);
   y=0
   } else
-  if(deg=270) {
+  if(deg===270) {
     x=0
   y = -(speed*Math.sin(deg*Math.PI/180)*86.4/111).toFixed(4)
   } else
-  if(deg=360) {
+  if(deg===360) {
   x = -(speed*Math.cos(deg*Math.PI/180)*86.4/111).toFixed(4);
   y=0
   }
   distance=(speed*86.4).toFixed(1)
-  
   return [x,y,distance]
  }
     
@@ -133,9 +127,7 @@ function go(deg, speed) {
     try {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=d7a3cd7e559b16d15b8a101ab388aad6`)
     let data = await response.json()
-    console.log(data)
     return data
-    console.log(lat,lon)
     }
     catch(err){
     alert(err)
@@ -144,7 +136,7 @@ function go(deg, speed) {
 
 async function line() { 
 for (let i=2;i<arrayArc.length; i+=2) {
-  if (arrayArc[i]==arrayArc[i-2]&&arrayArc[i+1]==arrayArc[i-1]) {
+  if (arrayArc[i]===arrayArc[i-2]&&arrayArc[i+1]===arrayArc[i-1]) {
  arrayArc.splice(i,2)}
   }
  let res1=nextValue()
@@ -162,15 +154,14 @@ for (let i=2;i<arrayArc.length; i+=2) {
     document.getElementById('cartina').style.backgroundImage='none'
     document.getElementById('mesto').style.backgroundImage='linear-gradient(to right,white,lightgreen)'
     for(let i =2;i<arrayArc.length-1; i+=2) {
-      if(arrayArc[i]==arrayArc[i-2]&&arrayArc[i+1]==arrayArc[i-1]){
-        arrayArc.splice(i,2)}/*else {calendar=calendar+1}*/
+      if(arrayArc[i]===arrayArc[i-2]&&arrayArc[i+1]===arrayArc[i-1]){
+        arrayArc.splice(i,2)}
         console.log(calendar)
       }
       day=(arrayArc.length-2)/2
       console.log(arrayArc)   
       console.log(day)
 }
-
 
 async function line2(a,b) {
         try {
@@ -185,10 +176,8 @@ async function line2(a,b) {
     }
     document.getElementById('veter').style.backgroundImage='linear-gradient(to right,white,lightgreen)'
     document.getElementById('cartina').style.backgroundImage='none'
+    }
       
-  }
-
- 
   async function line3() {
         try {
           let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?locations=${lat},${lon}&zoom=6&size=@2x&defaultMarker=marker-md-3B5998-22407F&key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4`)
@@ -204,7 +193,6 @@ async function line2(a,b) {
         document.getElementById('mesto').style.backgroundImage='none'
         document.getElementById('veter').style.backgroundImage='linear-gradient(to right,white,lightgreen)'}
   
- 
   let cloud;
   async function line4(z) {
         try {
@@ -248,6 +236,7 @@ async function line2(a,b) {
         alert(err)
     }
   }
+  
   function calculate(gt) {
     let lt1, lt2, ln1, ln2
     lt1=arrayArc[0]
@@ -260,45 +249,43 @@ async function line2(a,b) {
     let lon1 = ln1*Math.PI/180
     let lon2 = ln2*Math.PI/180;
 
-  let clt1 = Math.cos(lat1)
-  let clt2 = Math.cos(lat2)
-  let slt1 = Math.sin(lat1)
-  let slt2 = Math.sin(lat2)
-  let delta = lon2-lon1
-  let cdelta = Math.cos(delta)
-  let sdelta = Math.sin(delta);
+    let clt1 = Math.cos(lat1)
+    let clt2 = Math.cos(lat2)
+    let slt1 = Math.sin(lat1)
+    let slt2 = Math.sin(lat2)
+    let delta = lon2-lon1
+    let cdelta = Math.cos(delta)
+    let sdelta = Math.sin(delta);
 
-  let y = Math.sqrt(Math.pow(clt2*sdelta,2)+Math.pow((clt1*slt2*cdelta-slt1*clt2*cdelta),2))
-  let x = slt1*slt2+clt1*clt2*cdelta;
-  let ad = Math.atan2(y,x)
-  let dist = (ad*6372.795).toFixed(1)
-  console.log(dist, delta)
-  return dist
+    let y = Math.sqrt(Math.pow(clt2*sdelta,2)+Math.pow((clt1*slt2*cdelta-slt1*clt2*cdelta),2))
+    let x = slt1*slt2+clt1*clt2*cdelta;
+    let ad = Math.atan2(y,x)
+    let dist = (ad*6372.795).toFixed(1)
+    console.log(dist, delta)
+    return dist
   }
  
-  
-  const AddPoint = ({onNewPoint=f=>f, onFirstPlace=f=>f})=> {
-    let _lt, _ln
-    const submit = e => {
-    e.preventDefault()
-    onNewPoint(_lt.value,_ln.value)
-    document.getElementById('add').disabled=true
-    }
-
- return (
-   <form id = "formAddPoint" onSubmit = {submit}>
-    <input ref = {input =>_lt=input}
-    type="number" min="-90" max="90" step="0.0001"
-          placeholder = "Широта -90...90" required
+    const AddPoint = ({onNewPoint=f=>f, onFirstPlace=f=>f})=> {
+        let _lt, _ln
+        const submit = e => {
+        e.preventDefault()
+        onNewPoint(_lt.value,_ln.value)
+        document.getElementById('add').disabled=true
+        }
+      return (
+        <form id = "formAddPoint" onSubmit = {submit}>
+          <input ref = {input =>_lt=input}
+          type="number" min="-90" max="90" step="0.0001"
+                placeholder = "Широта -90...90" required
+                pattern="\d+(\.\{2}?"/>
+          <input ref = {input =>_ln=input}
+          type="number" min="-180" max="180" step="0.0001"
+          placeholder = "Долгота -180...180" required
           pattern="\d+(\.\{2}?"/>
-    <input ref = {input =>_ln=input}
-    type="number" min="-180" max="180" step="0.0001"
-    placeholder = "Долгота -180...180" required
-    pattern="\d+(\.\{2}?"/>
-    <button id='add'> Старт </button>
-    </form>
- )
-}
+          <button id='add'> Старт </button>
+          </form>
+      )
+  }
 
 const Zoom = ({onNewSize})=> {
  let _z
@@ -363,8 +350,7 @@ const Place = ({onNewPlace})=> {
   }
 
   export const Average = ({days})=>{
-    
-    let d=0;let v=0;let j;
+      let d=0;let v=0;let j;
       for (let i = 0;i<days.length; i++) {
       d=d+parseFloat(days[i].distance)
     }
@@ -378,174 +364,79 @@ const Place = ({onNewPlace})=> {
         <div>
           <div> Всего расстояние: {d}</div>
           <div>Всего дней: {j}</div>
-          <div>Средняя скорость: {v}</div>
+          <div>Среднедневной перелет: {v}</div>
       </div>)
 }
-   const Fly=(days)=>{
-     return (
-       <span>Перелет{days.distance}</span>
-     )
-   }
+    export const Shylda = ({days}) => {
+        for (let i = 0;i<days.length; i++) {
+          name1 = days[i].name;
+          country1 = days[i].country }
+        return (
+  <        div> {country1}   {name1} </div>)
+      }
 
-  export const Shylda = ({days}) => {
-    for (let i = 0;i<days.length; i++) {
-  name1 = days[i].name;
-  country1 = days[i].country }
+export const Jour = ({onJour=f=>f, onDist=f=>f,dist})=> {
+   let _jour
+      const submit = e => {
+      e.preventDefault()
+      onJour(_jour.value)
+      onDist(_jour.value)
+    }
     return (
-  <div> {country1}   {name1} </div>)
-  }
-
-export const Jour = ({onJour=f=>f, onDist=f=>f,dist1})=> {
-
-  let _jour
-   const submit = e => {
-   e.preventDefault()
-   onJour(_jour.value)
-   onDist(_jour.value)
-}
-  return (
         <div>
           <form onSubmit = {submit}>
-    <input ref = {input =>_jour=input}
+          <input ref = {input =>_jour=input}
           type = "number" min = "1" placeholder = "Day" required/>
           <button id= "directPoint">Выбрать день</button></form>
-                    <div id= "direct"> Прямое расстояние {dist1} км</div>
+          <div id= "direct"> Прямое расстояние {dist} км</div>
       </div>)
 }
-
-export const Tablo=({arr}) => { 
-  for (let i = 0;i<6;i++) {
-  let front = document.createElement('div')
-  front.className='front'
-  front.id='front'
-  document.body.appendChild(front)
-}
-
-let tran = document.getElementsByClassName('front')
-  for (let i=0;i<tran.length;i++) {
-    tran[i].setAttribute('id',i)
-    tran[i].style.opacity='0'
-    tran[i].style.transitionProperty ='opacity'
-    tran[i].style.transitionProperty ='transform'
-    tran[i].style.transitionDelay =`0.5s`   
-    tran[i].style.transitionDuration ='1s'
-    let arrayVokrug = ['В','О','К','Р','У','Г']
-    tran[i].innerHTML=arrayVokrug[i]
-  }
-
-     window.addEventListener('load', function() {
-    for (let i =0;i<tran.length;i++) {
-      tran[i].style.opacity = '1'
-      tran[i].style.transform = 'rotateY(-360deg)'
-      tran[i].style.transitionDelay =`${2*i}s`
-      console.log(i);
-      
-  }})
-
-  for (let i = 0;i<5;i++) {
-  let front1 = document.createElement('div')
-  front1.className='front1'
-  front1.id='front1'
-  document.body.appendChild(front1)
-}
-  let tran1 = document.getElementsByClassName('front1')
-  for (let i=0;i<tran1.length;i++) {
-    tran1[i].setAttribute('id',i)
-    tran1[i].style.opacity='0'
-    tran1[i].style.transitionProperty ='opacity'
-    tran1[i].style.transitionProperty ='transform'
-    tran1[i].style.transitionDelay =`0.5s`   
-    tran1[i].style.transitionDuration ='1s'
-    let arrayVokrug1 = ['С', 'В','Е','Т','А']
-    tran1[i].innerHTML=arrayVokrug1[i]
-  }
- 
-           
-        window.addEventListener('load', function() {
-    for (let i =0;i<tran1.length;i++) {
-      tran1[i].style.opacity = '1'
-      tran1[i].style.transform = 'translateX(50px)'
-      tran1[i].style.transitionDelay  ='12s'
-    }
-})
-
-let calendar1;
-  for (let i = 0;i<arrayEmp.length; i++) {
-      calendar1=arrayEmp.map((i, index)=>i)}
-    return(
-<div id = "markers1"> 
-<div className ='marker_red'></div> 
-<div className ='marker_black'></div> 
-<div className ='marker_blue'></div>
-<div className ='marker_yellow'></div>   
-<div className ='marker_green'></div>   
-</div>)    
-}
-
-   
+  
 const Map =()=>{
+  const dispatch = useDispatch()
   const wind = useSelector(state=>state.wind)
   const temp = useSelector(state=>state.temp)
   const sys = useSelector(state=>state.sys)
   const clouds = useSelector(state=>state.clouds)
   const name = useSelector(state=>state.name)
   const days = useSelector(state=>state.days)
-  const dist1= useSelector(state=>state.dist1)
-
+  const dist= useSelector(state=>state.dist)
+  const cloudness = useSelector(state=>state.cloudness)
 
   async function changePicture() {
-    const src =line()
-    store.dispatch({type:"CHANGE_PICTURE"})
-        }  
+    line()
+  }  
 
    async function getWind() {
       const {wind, main,clouds,sys, name} = await fetchWind()
-      const{speed,deg, gust}=wind
+      const{speed,deg}=wind
       const {temp} = main
-      const {country} = sys
       const temp1 = (temp -273.15).toFixed(1)
-      const {all} = clouds
       go(deg,speed)
-      const coords = {
-      latt:speed*86.4/111,
-      long:speed*86.4/55
-      }
       console.log(lat,lon,distance)
       console.log(deg)
       document.getElementById('veter').style.backgroundImage='none'
       document.getElementById('cartina').style.backgroundImage='linear-gradient(to right,white,lightgreen)'
-      store.dispatch(
-      {type:"GET_WIND", 
-      payload:
-      {wind:wind, 
-        sys:sys,
-        name:name,
-        clouds:clouds,
-        temp:temp1
-      }
-    })
+      dispatch(get_wind(wind, sys, name, clouds, temp1))
     console.log(store.getState())
    }
     
-  
   function addPoint(a,b) {
-  const point = line2(a,b)
+  line2(a,b)
   lat=a
   lon=b
   array.push(`${a},`)
   array.push(b)
   arrayArc.push(parseFloat(a))
   arrayArc.push(parseFloat(b))
-  if(a>0) {alert(`Окружность Земли на этой широте составляет примерно ${parseFloat(40030-a*40030/90).toFixed(0)} км`)
-  }else{alert(`Окружность Земли на этой широте составляет примерно ${parseFloat(40030+a*40030/90).toFixed(0)} км`)}
   console.log(lat, lon)
   console.log(a,b)
-  store.dispatch(add_point())
+  dispatch(add_point())
   console.log(store.getState())
   }
  
    async function showPicture() {
-     const picture = line3()
+     line3()
      const {clouds, sys,name} =  await fetchWind();
      const {country} = sys
      const {all} = clouds
@@ -561,65 +452,47 @@ const Map =()=>{
         }
       ]
       for (let i =1; i<(days1.length+1);i++) {
-      if (JSON.stringify(days1[i])==JSON.stringify(days1[i-1])) {
+      if (JSON.stringify(days1[i])===JSON.stringify(days1[i-1])) {
         days1.splice(i,1)
       }
     }
       console.log(days1)
       console.log(arrayArc[0], lat, lon)
-      store.dispatch({type:"SHOW_PICTURE",
-    payload: {
-      sys:sys,
-      name:name,
-      clouds:clouds,
-      days:days1
-    }})
+      dispatch(show_picture(sys, name,clouds,days1))
     console.log(store.getState())
  }
 
-
    function showLargePicture(z) {
-     const largePicture = line4(z)
-     store.dispatch({type:"SHOW_LARGE_PICTURE"})
+     line4(z)
    }
 
    function showPlace(place,z) {
-     const liv = line5(place,z)
-     store.dispatch({type:"SHOW_PLACE"})
-   }
+     line5(place,z)
+  }
 
     function  showJour(gt) {
-     const jour = line7(gt)
-     store.dispatch({type:"SHOW_JOUR"})
-     }
+     line7(gt)
+  }
 
     function showDist(gt) {
       const dist1 = calculate(gt)
       console.log(dist1)
-      store.dispatch({type:"SHOW_DIST",
-      payload: {
-        dist1:dist1
-      }
-      })
+      dispatch(show_dist(dist1))
     }
 
       
   function clean() {
-    const {cloudness} = store.getState()   
     for (let i=0; i<100;i++) {
     let tdClean = document.getElementsByTagName('td')[i]}
     for (let i = 0;i<100;i++) {
       document.getElementById(i).style.opacity=0
       }
-      store.dispatch({type: "SHOW_CLOUDS",
-      payload: {cloudness:false}
-     })
+      dispatch(hide_clouds())
       console.log(store.getState())
     }
     
     function withClouds() {
-      const {cloudness} = store.getState()  
-          for (let i=0; i<100;i++) {
+     for (let i=0; i<100;i++) {
      let td =  document.getElementsByTagName('td')[i].setAttribute('id',i)
       } 
       for (let i = 0;i<100;i++) {
@@ -644,24 +517,19 @@ const Map =()=>{
       for (let i=0;i<arr3.length+1;i++) {
         const array4 = arr3.map(i=>document.getElementById(i).style.opacity='1')
       }
-     store.dispatch({type: "HIDE_CLOUDS",
-     payload: {cloudness:true}
-    })
+     dispatch(show_clouds())
     console.log(store.getState())
   } 
 
     function choose() {
-          const {cloudness} = store.getState() 
-         if (cloudness===true) {
+           if (cloudness===true) {
            clean()
          } else {
            withClouds()
          }
       }
-         
-     
-    return (
-
+        
+      return (
         <div>
               <div id="fon1">
               <div id ="slider">
@@ -700,14 +568,15 @@ const Map =()=>{
 <button id = 'mesto' onClick = {showPicture}>Пункт прибытия</button>
 <button id = "withClouds" onClick = {choose}>Облака</button>
 </div>
-
+<div id="punkt">Пункт прибытия</div>
+<div id ="neighbours">По карте</div>
 
 <div className = "zoom"><Zoom onNewSize={showLargePicture}/></div>
 <div id="placeWatch"><Place onNewPlace = {showPlace}/></div>
     <div className="coord">Координаты: 
     <span>{lat},{lon}</span>
 </div>
-<div className = {(temp<-10)?"weather winter":(temp>-10&&temp<-5)?"weather autumn":(temp>-5&&temp<15)?"weather spring":(temp>15&&temp<30)?"weather summer":(temp>30&&temp<40)?"weather thirty_five":(temp>40&&temp<60)?"weather zacuha":"none1"} style = {{backgroundRepeat:'no-repeat'}}></div> 
+<div className = {(temp<-10)?"weather winter":(temp>-10&&temp<-5)?"weather autumn":((temp===-5||temp>-5)&&(temp<15||temp===15))?"weather spring":(temp>15&&temp<30)?"weather summer":((temp===30||temp>30)&&temp<40)?"weather thirty_five":((temp===40||temp>40)&&temp<60)?"weather zacuha":"none"} style = {{backgroundRepeat:'no-repeat'}}></div> 
   <div className = 'term'>
   <div className = "scale" style={{marginLeft:'28px', marginBottom:'49px',height:`${(temp<0)?(64.57+temp*1.614):(64.57+temp*1.614)}px`,width:'4px',backgroundColor:'red',  opacity:'0.7', transitionProperty:'height', transitionDuration:'2s'}}>   </div>
   </div>  
@@ -716,7 +585,7 @@ const Map =()=>{
 <div className = "name"> Место  {name}</div>
 <div>Ветер <span className = {(wind.speed>0&&wind.speed<5)?"weak":(wind.speed<10)?"moderate":(wind.speed<18)?"strong":(wind.speed<25)?"storm":(wind.speed>25&&wind.speed<40)?"hurricane":"standart"}> {wind.speed}</span></div>
 <div>Направление {wind.deg}</div>
-<div>Температура <span className = {(temp<-30)?"ice":(temp<25)?"froze":(temp<20)?"very_cold":(temp<15)?"cold":(temp<-10||temp==-10)?"very_cool":(temp<-5)?"oool":(temp<0)?"cool":(temp>0&temp<5)?"zero":(temp>5&&temp<15)?"light_warm":(temp>15&&temp<25)?"warm":(temp>25&&temp<30)?"hot":(temp>30&&temp<58)?"heat":"standart"}>{temp}</span></div>
+<div>Температура <span className = {(temp<-30)?"ice":(temp<25)?"froze":(temp<20)?"very_cold":(temp<15)?"cold":(temp<-10||temp===-10)?"very_cool":(temp<-5)?"oool":(temp<0)?"cool":(temp>0&temp<5)?"zero":(temp>5&&temp<15)?"light_warm":(temp>15&&temp<25)?"warm":(temp>25&&temp<30)?"hot":(temp>30&&temp<58)?"heat":"standart"}>{temp}</span></div>
 
 </div>
 
@@ -734,7 +603,7 @@ const Map =()=>{
 <Diary days = {days}/>
 <div id ='average'><Average days={days}/></div>
 
-<div className = 'jour'><Jour onJour = {showJour} onDist ={showDist} dist1 = {dist1}/></div>
+<div className = 'jour'><Jour onJour = {showJour} onDist ={showDist} dist = {dist}/></div>
     </div>
 </div>)
     }

@@ -6,46 +6,45 @@ export const add_point = ()=> {
     }
 }
 
-export const get_wind = (wind, sys, main, name, clouds)=> {
+export const get_wind = (wind, sys, name, clouds, temp)=> {
     return {
         type:constants.GET_WIND, 
-        payload:{wind:wind, sys:sys, main:main, name:name, clouds:clouds}
+        wind,
+        sys, 
+        name,
+        clouds,
+        temp
     }
 }
 
-export const change_picture = ()=> {
+export const show_picture = (sys,name, clouds, days)=> {
     return {
-        type:constants.CHANGE_PICTURE
+        type:constants.SHOW_PICTURE,
+        sys,
+        name,
+        clouds,
+        days
     }
 }
 
-export const show_picture = ()=> {
+export const show_clouds = ()=> {
     return {
-        type:constants.SHOW_PICTURE
+        type:constants.SHOW_CLOUDS,
+        cloudness:true
     }
 }
 
-export const show_large_picture = ()=> {
+export const hide_clouds = ()=> {
     return {
-        type:constants.SHOW_LARGE_PICTUREE
+        type:constants.HIDE_CLOUDS,
+        cloudness:false
     }
 }
 
-export const show_place = ()=> {
+export const show_dist = (dist)=> {
     return {
-        type:constants.SHOW_PLACE
-    }
-}
-
-export const show_jour = ()=> {
-    return {
-        type:constants.SHOW_JOUR
-    }
-}
-
-export const show_dist = ()=> {
-    return {
-        type:constants.SHOW_DIST
+        type:constants.SHOW_DIST,
+        dist
     }
 }
 
