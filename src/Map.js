@@ -2,6 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {add_point, get_wind,show_picture,show_dist, hide_clouds, show_clouds} from './actions'
 import store from './store'
+import $ from "jquery"
 
 let x;
 let y;
@@ -144,9 +145,9 @@ for (let i=2;i<arrayArc.length; i+=2) {
         let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4&shape=${res1[0]}&size=950,450@2x`)
         let blob = await response.blob()
         let img = document.createElement('img')
-        document.body.append(img)
         img.src = URL.createObjectURL(blob)
         img.id='imgLine'
+        $(".ramka1").append(img)
         console.log(res1)            
         } catch (err){
         alert(err)
@@ -168,9 +169,9 @@ async function line2(a,b) {
         let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?locations=${a},${b}&zoom=4&size=@2x&defaultMarker=marker-md-3B5998-22407F&key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4`)
         let blob = await response.blob()
         let img = document.createElement('img')
-        document.body.append(img)
         img.src = URL.createObjectURL(blob)
         img.id='imgLine2'
+        $(".ramka1").append(img)
         } catch (err){
         alert(err)
     }
@@ -185,7 +186,7 @@ async function line2(a,b) {
         document.getElementById('ramka2').style.opacity='1'
         let img = document.createElement('img')
         img.id = 'imgLine3'
-        document.body.append(img)
+        $(".ramka2").append(img)
         img.src = URL.createObjectURL(blob);
         } catch (err){
         alert(err)
@@ -199,7 +200,7 @@ async function line2(a,b) {
         let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?locations=${lat},${lon}&zoom=${z}&size=@2x&defaultMarker=marker-md-3B5998-22407F&key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4`)
         let blob =await response.blob()
         let img = document.createElement('img')
-        document.body.append(img)
+        $(".ramka3").append(img)
         img.src = URL.createObjectURL(blob)
         img.id = 'imgLine4'
         console.log(lat, lon)
@@ -213,9 +214,9 @@ async function line2(a,b) {
         let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4&center=${place}&size=@2x&zoom=${z}`)
         let blob = await response.blob()
         let img = document.createElement('img')
-        document.body.append(img)
         img.src = URL.createObjectURL(blob)
         img.id='imgLine5'
+        $(".ramka4").append(img)
         console.log(lat, lon)
         } catch (err){
         alert(err)
@@ -224,12 +225,12 @@ async function line2(a,b) {
   
   async function line7(gt) {
         try {
-        let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?locations=${arrayArc[0]},${arrayArc[1]}||${arrayArc[gt*2]},${arrayArc[gt*2+1]}&size=550,550@2x&"marker-7B0099"&marker-end&key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4`)
+        let response = await fetch(`https://www.mapquestapi.com/staticmap/v5/map?locations=${arrayArc[0]},${arrayArc[1]}|marker-start||${arrayArc[gt*2]},${arrayArc[gt*2+1]}|marker-end&size=550,550@2x&&key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4`)
         let blob = await response.blob()
         let img = document.createElement('img')
-        document.body.append(img)
         img.src = URL.createObjectURL(blob)
         img.id='imgLine7'
+        $(".ramka5").append(img)
         console.log(arrayArc)
         console.log(arrayArc[gt*2-2],arrayArc[gt*2-1])
         } catch (err){
@@ -531,8 +532,8 @@ const Map =()=>{
         
       return (
         <div>
-              <div id="fon1">
-              <div id ="slider">
+          <div id="fon1">
+            <div id ="slider">
               <div className ="slideZeroMinus3 slide7a"></div>
               <div className ="slideZeroMinus2 slide7b"></div>
               <div className ="slideZeroMinus1 slide6"></div>
@@ -542,68 +543,67 @@ const Map =()=>{
               <div className ="slideTwo slide2"></div>
               <div className ="slideThree slide1"></div>
             </div>
-           </div>
-               <button onClick = {addPoint}>ААА</button>
-               
-              <div id ='field'> 
+          </div>
+                              
+          <div id ='field'> 
               <table id = 'table1'>
                 <tbody>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-  </tbody>
- </table>
- <div id="coor"><AddPoint onNewPoint = {addPoint}/></div>
-<div id="plan">Общий план</div>
-<div className="buttons">
-<button id = "veter" onClick = {getWind}>Запросить погоду...</button>
-<button id ="cartina" onClick = {changePicture}>Перелет</button>
-<button id = 'mesto' onClick = {showPicture}>Пункт прибытия</button>
-<button id = "withClouds" onClick = {choose}>Облака</button>
-</div>
-<div id="punkt">Пункт прибытия</div>
-<div id ="neighbours">По карте</div>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+              </table>
 
-<div className = "zoom"><Zoom onNewSize={showLargePicture}/></div>
-<div id="placeWatch"><Place onNewPlace = {showPlace}/></div>
-    <div className="coord">Координаты: 
-    <span>{lat},{lon}</span>
-</div>
-<div className = {(temp<-10)?"weather winter":(temp>-10&&temp<-5)?"weather autumn":((temp===-5||temp>-5)&&(temp<15||temp===15))?"weather spring":(temp>15&&temp<30)?"weather summer":((temp===30||temp>30)&&temp<40)?"weather thirty_five":((temp===40||temp>40)&&temp<60)?"weather zacuha":"none"} style = {{backgroundRepeat:'no-repeat'}}></div> 
-  <div className = 'term'>
-  <div className = "scale" style={{marginLeft:'28px', marginBottom:'49px',height:`${(temp<0)?(64.57+temp*1.614):(64.57+temp*1.614)}px`,width:'4px',backgroundColor:'red',  opacity:'0.7', transitionProperty:'height', transitionDuration:'2s'}}>   </div>
-  </div>  
-  <div className ="datum" id="datum">
-<div className = "country">Cтрана  {sys.country}</div>
-<div className = "name"> Место  {name}</div>
-<div>Ветер <span className = {(wind.speed>0&&wind.speed<5)?"weak":(wind.speed<10)?"moderate":(wind.speed<18)?"strong":(wind.speed<25)?"storm":(wind.speed>25&&wind.speed<40)?"hurricane":"standart"}> {wind.speed}</span></div>
-<div>Направление {wind.deg}</div>
-<div>Температура <span className = {(temp<-30)?"ice":(temp<25)?"froze":(temp<20)?"very_cold":(temp<15)?"cold":(temp<-10||temp===-10)?"very_cool":(temp<-5)?"oool":(temp<0)?"cool":(temp>0&temp<5)?"zero":(temp>5&&temp<15)?"light_warm":(temp>15&&temp<25)?"warm":(temp>25&&temp<30)?"hot":(temp>30&&temp<58)?"heat":"standart"}>{temp}</span></div>
+        <div id="coor"><AddPoint onNewPoint = {addPoint}/></div>
+        <div id="plan">Общий план</div>
+        <div className="buttons">
+          <button id = "veter" onClick = {getWind}>Запросить погоду...</button>
+          <button id ="cartina" onClick = {changePicture}>Перелет</button>
+          <button id = 'mesto' onClick = {showPicture}>Пункт прибытия</button>
+          <button id = "withClouds" onClick = {choose}>Облака</button>
+        </div>
+        <div id="punkt">Пункт прибытия</div>
+        <div id ="neighbours">По карте</div>
 
-</div>
+        <div className = "zoom"><Zoom onNewSize={showLargePicture}/></div>
+        <div id="placeWatch"><Place onNewPlace = {showPlace}/></div>
+        <div className="coord">Координаты: 
+            <span>{lat},{lon}</span>
+        </div>
+        <div className = {(temp<-10)?"weather winter":(temp>-10&&temp<-5)?"weather autumn":((temp===-5||temp>-5)&&(temp<15||temp===15))?"weather spring":(temp>15&&temp<30)?"weather summer":((temp===30||temp>30)&&temp<40)?"weather thirty_five":((temp===40||temp>40)&&temp<60)?"weather zacuha":"none"} style = {{backgroundRepeat:'no-repeat'}}></div> 
+          <div className = 'term'>
+          <div className = "scale" style={{marginLeft:'28px', marginBottom:'49px',height:`${(temp<0)?(64.57+temp*1.614):(64.57+temp*1.614)}px`,width:'4px',backgroundColor:'red',  opacity:'0.7', transitionProperty:'height', transitionDuration:'2s'}}></div>
+          </div>  
+          <div className ="datum" id="datum">
+            <div className = "country">Cтрана  {sys.country}</div>
+            <div className = "name"> Место  {name}</div>
+            <div>Ветер <span className = {(wind.speed>0&&wind.speed<5)?"weak":(wind.speed<10)?"moderate":(wind.speed<18)?"strong":(wind.speed<25)?"storm":(wind.speed>25&&wind.speed<40)?"hurricane":"standart"}> {wind.speed}</span></div>
+            <div>Направление {wind.deg}</div>
+            <div>Температура <span className = {(temp<-30)?"ice":(temp<25)?"froze":(temp<20)?"very_cold":(temp<15)?"cold":(temp<-10||temp===-10)?"very_cool":(temp<-5)?"oool":(temp<0)?"cool":(temp>0&temp<5)?"zero":(temp>5&&temp<15)?"light_warm":(temp>15&&temp<25)?"warm":(temp>25&&temp<30)?"hot":(temp>30&&temp<58)?"heat":"standart"}>{temp}</span></div>
+          </div>
 
-<div id = "ramka1"></div>
-<div id = "ramka2"></div>
-<Calendar days = {days}/>
-<div id="clouds">Облачность:{clouds.all}% </div>  
-<div className = 'shylda'><Shylda days = {days}/></div>
-<div id = "ramka3"></div>
-<div id = "ramka4"></div>
-<div id = "ramka5"></div>
-</div>
-<div id="basket"></div>
-<div className="statistics">
-<Diary days = {days}/>
-<div id ='average'><Average days={days}/></div>
-
-<div className = 'jour'><Jour onJour = {showJour} onDist ={showDist} dist = {dist}/></div>
+        <div className="ramka1"><div id = "ramka1"></div></div>
+        <div className="ramka2"><div id = "ramka2"></div></div>
+        <div className="ramka3"><div id = "ramka3"></div></div>
+        <div className="ramka4"><div id = "ramka4"></div></div>
+        <div className="ramka5"><div id = "ramka5"></div></div>
+        <Calendar days = {days}/>
+        <div id="clouds">Облачность:{clouds.all}% </div>  
+        <div className = 'shylda'><Shylda days = {days}/></div>
+       
+        <div id="basket"></div>
+        <div className="statistics">
+          <Diary days = {days}/>
+          <div id ='average'><Average days={days}/></div>
+          <div className = 'jour'><Jour onJour = {showJour} onDist ={showDist} dist = {dist}/></div>
+        </div>
     </div>
 </div>)
     }

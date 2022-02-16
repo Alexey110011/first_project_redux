@@ -1,7 +1,7 @@
 body {
   width:100vw;
-  overflow-x: hidden;
-  margin:0;
+  /*overflow-x: hidden;*/
+  margin:0 auto;
   padding:0;
  }
 
@@ -25,17 +25,19 @@ input ::placeholder {
   font-family: cursive;
   font-size: 14px;
 }
-   #field {
-    position:relative;
-    top:-300px;
-    padding-left:10px;
-    }
-#basket {
+
+#field {
+  position:relative;
+  top:-300px;
+  padding-left:10px;
+  }
+
+/*#basket {
   position:relative;
   top:-340px;
   width:100%;
   height:30px;
- }
+ }*/
 
 div {
   font-size: 18px;
@@ -50,34 +52,40 @@ nav {
   font-family:"Apple Chancery", cursive;
   font-size: 20px;
 }
+
 nav ul li{
   display:inline-block;
   margin:5px
 }
+
 .day1 {    
 font-family: cursive;
 font-size: 18px;
 text-align: center;
 }
+
 .point {    
 width:400px;
 font-family: cursive;
 font-size: 18px;
 }
+
 .distance1 {    
 width:250px;
 text-align: center;
 font-family: cursive;
 font-size: 18px;
 }
+
 #direct {
-  position:relative;
-  top:-20px;
+  position:/*relative*/absolute;
+  top:-0px/*20px*/;
   left:335px;
   font-family: cursive;
   font-size: 20px;
   color: rgb(107, 19, 3);
 }
+
 .weak {
   color:lightskyblue
 }
@@ -154,11 +162,12 @@ font-size: 18px;
   margin:25px 300px 0 575px;
   font-size: 20px;
   font-family: "Apple Chancery", cursive;
-
 }
+
 #scale1:hover {
 height:70px
 }
+
 .term {
   display:flex;
 align-items:flex-end;
@@ -169,6 +178,7 @@ align-items:flex-end;
   background-image: url(./images/termometr.jfif);  
   margin-left:30px;
 } 
+
 .scale {
 width:80px;
 transition-property:height;
@@ -177,6 +187,7 @@ opacity:1;
 vertical-align:center;
 background-color: red;
 }
+
 .weather {
   position: absolute;
   left:95px;
@@ -187,18 +198,23 @@ background-color: red;
 .autumn {
   background-image: url(./images/autumn1.jfif);
 } 
+
 .winter {
   background-image: url(./images/winter.jfif);
 }
+
 .spring {
   background-image: url(./images/spring.jfif);
 }
+
 .summer{
   background-image: url(./images/summer.jfif);
 }
+
 .thirty_five {
   background-image: url(./images/35.jfif);
 }
+
 .zacuha {
   background-image: url(./images/zacuha.jfif);
 }
@@ -208,18 +224,22 @@ margin-left:40%;
 font-family: cursive;
 font-size: 14px;
 }
+
 button {
 font-family: sans-serif;
 font-size: 14px;
 margin-right:2px
 }
+
 #withClouds {
   color:blue;
   margin-left:200px;
 }
+
 #add {
   font-size: 14px;
 }
+
 #react-container {
 height:100vh;
 margin:0 auto;
@@ -232,7 +252,6 @@ position:relative;
 display:flexbox;
 justify-content:flex-start;
 margin:0 auto;
-background-color:yellow;
 }
 
 ul {
@@ -240,6 +259,7 @@ width:90%;
 background-color: bisque;
 text-align: right;
 }
+
 li {
 display:inline-block;
 list-style-type: none;
@@ -247,23 +267,28 @@ margin:5px;
 font-family: cursive;
 color:rgb(107, 19, 3);
 }
+
 li:hover {
 cursor:pointer;
 color:red;
 }
+
 .statistics {
 background-color: white;
 padding-left:16px
 }
+
 .map1 {
 position:absolute;
 top:600px; 
 background-image: url('https://www.mapquestapi.com/staticmap/v5/map?key=dDGK8sCXjbWcbowd7oVsGzyptmQpGLi4&center=20,20&zoom=1&size=1900,950@2x&scalebar=true')
 };
+
 .dist1 {
 position: relative;
 top:1000px
 }
+
 .slider {
 width:100vw;
 margin:0;
@@ -573,7 +598,13 @@ z-index: 5;
     background-size: cover;
    }
 
-#ramka2 {
+   .ramka1 {
+     position: absolute;
+     top: 0px;
+     left: 0px;
+   }
+
+  #ramka2 {
     position:absolute;
     top:170px;
     left:936px;
@@ -584,9 +615,15 @@ z-index: 5;
     opacity:0;
    }
 
+   .ramka2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
    #ramka3 {
     position:absolute;
-    top:582px;
+    top:0px;
     left:309px;
     height:25px;
     width:384px;
@@ -597,6 +634,12 @@ z-index: 5;
     color:rgb(107, 19, 3);
     padding-bottom: 6px;
    }
+
+   .ramka3{
+    position: absolute;
+    top: 582px;
+    left: 0px;
+  }
 
    #ramka4 {
     position: absolute;
@@ -611,12 +654,19 @@ z-index: 5;
     color:rgb(107, 19, 3);
     padding-bottom: 6px;
     }
+
+    .ramka4 {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
     #ramka5 {
       position: absolute;
-      top:1231px;
-      left:700px;
+      top:0px;
+      left:0px;
       height:25px;
-      width:620px;
+      width:620px;/*740*/
       background-image: url(./images/map.png);
       background-size: cover;
       font-family: cursive;
@@ -626,6 +676,12 @@ z-index: 5;
       z-index:4
       }
   
+      .ramka5{
+        position: absolute;
+        top: 1231px;
+        left: 700px;
+      }
+
 .datum {
 background-color: white;
 position:absolute;
@@ -660,7 +716,7 @@ top:105px
 
 .jour {
   position: absolute;
-  top:1267px;
+  top:1235px;
   left:710px ;
   z-index:65
  }
@@ -680,8 +736,8 @@ to {background-color:black;}
 
 #imgLine2 {
 position:absolute;
-top:228px;
-left: 390px;
+top:195px;
+left: 309px;
 height:384px;
 width:384px;
 box-shadow:2px 2px 8px;
@@ -689,7 +745,7 @@ box-shadow:2px 2px 8px;
 
 #imgLine {
 position:absolute;
-top:228px;
+top:196px/*208px*/;
 left:309px;
 height:384px;
 width:620px;
@@ -700,7 +756,7 @@ margin:0 auto
 
 #imgLine3 {
 position:absolute;
-top:228px;
+top:196px;
 left:936px;
 box-shadow:0px 2px 2px;
 height:384px;
@@ -710,7 +766,7 @@ margin:0 auto
 
 #imgLine4 {
 position:absolute;
-top:645px;
+top:/*621*/30px;
 left:309px;
 height:384px;
 width:384px;
@@ -720,7 +776,7 @@ box-shadow:2px 2px 2px;
 
 #imgLine5 {
 position:absolute;
-top:645px;
+top:/*621*/614px;
 left:700px;
 height:620px;
 width:620px;
@@ -729,7 +785,7 @@ margin:0 auto
 
 #imgLine6 {
 position:absolute;
-top:1290px;
+top:/*1265*/1290px;
 left:700px;
 box-shadow:0 2px 2px;
 height:620px;
@@ -739,8 +795,8 @@ margin:0 auto
 
 #imgLine7 {
 position:absolute;
-top:1290px;
-left:700px;
+top:/*1275*/27px;
+left:/*700*/0px;
 box-shadow:0 2px 2px;
 height:620px;
 width:620px;
@@ -752,17 +808,20 @@ Z-index:10
 position: absolute;
 top:196px;
 left:936px;
+width: 384px;
+height: 384px;
 z-index:8;
 border-collapse: collapse;
 opacity:1
 }
+
 td {
 background-color:white;
 border-collapse: collapse;
 border-radius: 15%;
 background-size: cover;
-height:36.4px;
-width:36.4px;
+height:9.53%;
+width:9.53%;
 opacity:0;
 }
 
@@ -819,7 +878,7 @@ width: 400px;
 }
 
 .distance,.distance1 {
-width: 218px;
+width: 202px;
 }
 
 .day, .place, .distance, .day1, .point, .distance1{
