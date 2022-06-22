@@ -585,10 +585,16 @@ const Map =()=>{
             <div className = "country">Cтрана  {sys.country}</div>
             <div className = "name"> Место  {name}</div>
             <div>Ветер <span className = {(wind.speed>0&&wind.speed<5)?"weak":(wind.speed<10)?"moderate":(wind.speed<18)?"strong":(wind.speed<25)?"storm":(wind.speed>25&&wind.speed<40)?"hurricane":"standart"}> {wind.speed}</span></div>
-            <div>Направление {wind.deg}</div>
+            <div>Направле
+              ние {wind.deg}</div>
             <div>Температура <span className = {(temp<-30)?"ice":(temp<25)?"froze":(temp<20)?"very_cold":(temp<15)?"cold":(temp<-10||temp===-10)?"very_cool":(temp<-5)?"oool":(temp<0)?"cool":(temp>0&temp<5)?"zero":(temp>5&&temp<15)?"light_warm":(temp>15&&temp<25)?"warm":(temp>25&&temp<30)?"hot":(temp>30&&temp<58)?"heat":"standart"}>{temp}</span></div>
           </div>
-
+          <nav>
+          <ul>
+          <li><a href = "#zoom">Место прибытия</a></li>
+          <li><a href ="#jour">Расстояние по прямой</a></li>
+          </ul>
+      </nav>
         <div className="ramka1"><div id = "ramka1"></div></div>
         <div className="ramka2"><div id = "ramka2"></div></div>
         <div className="ramka3"><div id = "ramka3"></div></div>
